@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  templateUrl: './tabs.page.html',
+  styleUrls: ['./tabs.page.scss'],
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
+  cartItemCount = 0;
 
-  constructor() {}
+  constructor(private cartService: CartService) { }
 
+  ngOnInit() {
+    this.cartService.getCartCount().subscribe((count: number) => {
+      this.cartItemCount = count;
+    });
+  }
 }

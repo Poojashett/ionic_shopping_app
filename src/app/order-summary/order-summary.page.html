@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Order Summary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Address</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
+        <ion-item>
+          <ion-label position="floating">Street</ion-label>
+          <ion-input [(ngModel)]="address.street" name="street" required #street="ngModel"></ion-input>
+          <ion-text color="danger" *ngIf="street.invalid && (street.dirty || street.touched)">
+            <p *ngIf="street.errors?.['required']">Street is required.</p>
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">City</ion-label>
+          <ion-input [(ngModel)]="address.city" name="city" required #city="ngModel"></ion-input>
+          <ion-text color="danger" *ngIf="city.invalid && (city.dirty || city.touched)">
+            <p *ngIf="city.errors?.['required']">City is required.</p>
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">State</ion-label>
+          <ion-input [(ngModel)]="address.state" name="state" required #state="ngModel"></ion-input>
+          <ion-text color="danger" *ngIf="state.invalid && (state.dirty || state.touched)">
+            <p *ngIf="state.errors?.['required']">State is required.</p>
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">ZIP Code</ion-label>
+          <ion-input [(ngModel)]="address.zip" name="zip" required #zip="ngModel"></ion-input>
+          <ion-text color="danger" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
+            <p *ngIf="zip.errors?.['required']">ZIP Code is required.</p>
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Payment Method</ion-label>
+          <ion-select [(ngModel)]="paymentMethod" name="paymentMethod" placeholder="Select Payment Method" required
+            #paymentMethod="ngModel">
+            <ion-select-option value="credit-card">Credit Card</ion-select-option>
+            <ion-select-option value="paypal">PayPal</ion-select-option>
+          </ion-select>
+          <ion-text color="danger" *ngIf="paymentMethod.invalid && (paymentMethod.dirty || paymentMethod.touched)">
+            <p *ngIf="paymentMethod.errors?.['required']">Payment Method is required.</p>
+          </ion-text>
+        </ion-item>
+
+        <ion-button expand="full" type="submit" [disabled]="orderForm.invalid">
+          Proceed
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
